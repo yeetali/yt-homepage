@@ -1,34 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import PageHeader from './layouts/PageHeader'
+import CategoryPills from './components/CategoryPills'
+import { categories, videos } from './data/home'
+import { useState } from 'react';
+import VideoGridItem from './components/VideoGridItem';
+import SideBar from './layouts/SideBar';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedCategory, setSelectedCategory] = useState(categories?.[0]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='max-h-screen flex flex-col'>
+      <PageHeader />
+      <div className="grid grid-cols-[auto_1fr] grow overflow-auto">
+        <SideBar />
+        <div className='overflow-x-hidden px-8 pb-4'>
+          <div className='sticky top-0 bg-white z-10 pb-4'>
+            <CategoryPills categories={categories} selectedCategory={selectedCategory} onSelect={setSelectedCategory} />
+          </div>
+          <div className='grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]'>
+            {videos.map(video => (
+              <VideoGridItem key={video.id} {...video} />
+            ))}
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
