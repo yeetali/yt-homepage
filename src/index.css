@@ -8,3 +8,21 @@
   --color-secondary-dark: theme(colors.neutral.800);
   --color-secondary-dark-hover: theme(colors.neutral.900);
 }
+
+*::-webkit-scrollbar {
+  @apply w-2 bg-transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-secondary-dark rounded-full;
+}
+
+.scrollbar-hidden::-webkit-scrollbar-thumb {
+  @apply bg-transparent;
+
+}
+
+.scrollbar-hidden:hover::-webkit-scrollbar-thumb {
+  @apply bg-secondary-border;
+
+}

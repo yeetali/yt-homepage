@@ -5,11 +5,13 @@ import { categories, videos } from './data/home'
 import { useState } from 'react';
 import VideoGridItem from './components/VideoGridItem';
 import SideBar from './layouts/SideBar';
+import SideBarProvider from './context/SideBarContext';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(categories?.[0]);
 
   return (
+    <SideBarProvider>
     <div className='max-h-screen flex flex-col'>
       <PageHeader />
       <div className="grid grid-cols-[auto_1fr] grow overflow-auto">
@@ -26,6 +28,7 @@ function App() {
         </div>
       </div>
     </div>
+    </SideBarProvider>
   )
 }
 
